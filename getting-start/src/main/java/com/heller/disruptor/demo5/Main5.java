@@ -45,11 +45,16 @@ public class Main5 {
         LongEventProducerWithTranslator producer = new LongEventProducerWithTranslator(ringBuffer);
 
         // 6. 模拟生产者发送数据
-        ByteBuffer byteBuffer = ByteBuffer.allocate(8);
+
+        // 共用 ByteBuffer 会导致数据错乱，不能共用 （并发导致数据覆盖）
+        // ByteBuffer byteBuffer = ByteBuffer.allocate(8);
+
         // 多个生产则会
         // 再来两个生产者
         new Thread(() -> {
-            //创建生产者
+            // !!! 注意这里的 ByteBuffer 不能公用
+            ByteBuffer byteBuffer = ByteBuffer.allocate(8);
+            // 创建生产者
             LongEventProducerWithTranslator eventProducer = new LongEventProducerWithTranslator(ringBuffer);
             // 发送消息
             for (int i = 0; i < 100; i++) {
@@ -64,7 +69,9 @@ public class Main5 {
         }, "producer1").start();
 
         new Thread(() -> {
-            //创建生产者
+            // !!! 注意这里的 ByteBuffer 不能公用
+            ByteBuffer byteBuffer = ByteBuffer.allocate(8);
+            // 创建生产者
             LongEventProducerWithTranslator eventProducer = new LongEventProducerWithTranslator(ringBuffer);
             // 发送消息
             for (int i = 100; i < 200; i++) {
