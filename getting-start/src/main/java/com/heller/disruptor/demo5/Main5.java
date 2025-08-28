@@ -14,6 +14,11 @@ import com.lmax.disruptor.dsl.ProducerType;
 import com.lmax.disruptor.util.DaemonThreadFactory;
 
 // 多生产者，多消费者，每条消息只被其中一个消费者消费
+
+/**
+ * 最佳实践：
+ * 尽量使用单生产者模式，因为它的性能最高。只有在确定需要多个生产者时，才使用多生产者模式！
+ */
 public class Main5 {
     public static void main(String[] args) throws Exception {
         // Ring Buffer 大小，必须是2的幂
