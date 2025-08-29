@@ -22,6 +22,7 @@
 
         <disruptor.version>3.4.4</disruptor.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
