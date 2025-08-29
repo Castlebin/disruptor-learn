@@ -45,17 +45,12 @@ public class Main5 {
         // 4. 获取 Ring Buffer
         RingBuffer<LongEvent> ringBuffer = disruptor.getRingBuffer();
 
-        // 5. 创建生产者
-        // 使用 EventTranslator 的生产者 代替  LongEventProducer
-        LongEventProducerWithTranslator producer = new LongEventProducerWithTranslator(ringBuffer);
-
-        // 6. 模拟生产者发送数据
+        // 5. 模拟多个生产者发送数据
 
         // 共用 ByteBuffer 会导致数据错乱，不能共用 （并发导致数据覆盖）
         // ByteBuffer byteBuffer = ByteBuffer.allocate(8);
 
-        // 多个生产则会
-        // 再来两个生产者
+        // 生产者 1
         new Thread(() -> {
             // !!! 注意这里的 ByteBuffer 不能公用
             ByteBuffer byteBuffer = ByteBuffer.allocate(8);
@@ -73,6 +68,7 @@ public class Main5 {
             }
         }, "producer1").start();
 
+        // 生产者 2
         new Thread(() -> {
             // !!! 注意这里的 ByteBuffer 不能公用
             ByteBuffer byteBuffer = ByteBuffer.allocate(8);
@@ -89,6 +85,12 @@ public class Main5 {
                 }
             }
         }, "producer2").start();
+
+        // 等待一段时间观察输出
+        Thread.sleep(10000);
+
+        // 6. 关闭 Disruptor
+        disruptor.shutdown();
     }
 
 }
