@@ -15,6 +15,17 @@ Disruptor 是一个高性能的并发编程框架，主要用于低延迟、高�
 ### Ring Buffer
 Ring Buffer 是 Disruptor 的核心组件，它是一个固定大小的数组，形成一个环形结构。生产者将事件写入 Ring Buffer，而消费者从中读取事件。Ring Buffer 的大小**必须**是 2 的幂，以便于计算索引。
 
+### 等待策略
+等待策略定义了消费者在等待事件时的行为。常见的等待策略包括：
+- **Blocking Wait Strategy**: 使用锁和条件变量，适用于低吞吐量的场景。
+- **Sleeping Wait Strategy**: 通过短暂的睡眠来减少 CPU 使用率，适用于中等吞吐量的场景。
+- **Yielding Wait Strategy**: 通过让出 CPU 时间片来减少延迟，适用于高吞吐量的场景。
+- **Busy Spin Wait Strategy**: 通过持续轮询来实现最低延迟，适用于极高吞吐量的场景。
+- **Phased Backoff Wait Strategy**: 结合了多种等待策略，根据系统负载动态调整等待行为。
+- **Lite Blocking Wait Strategy**: 轻量级的阻塞等待策略，适用于低延迟需求的场景。
+- **Timeout Blocking Wait Strategy**: 带有超时机制的阻塞等待策略，适用于需要防止长时间阻塞的场景。
+- **Yielding Lite Wait Strategy**: 结合了让出 CPU 和轻量级阻塞的等待策略，适用于需要平衡延迟和 CPU 使用率的场景。
+
 
 ## Getting Started
 
