@@ -6,7 +6,6 @@ import com.heller.disruptor.demo1.LongEvent;
 import com.heller.disruptor.demo1.LongEventFactory;
 import com.heller.disruptor.demo2.LongEventProducerWithTranslator;
 import com.heller.disruptor.demo4.LongEventWorkHandler;
-import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
