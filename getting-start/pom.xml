@@ -18,7 +18,7 @@
 
         <junit-bom.version>5.13.1</junit-bom.version>
 
-        <lombok.version>1.18.38</lombok.version>
+        <lombok.version>1.18.40</lombok.version>
 
         <disruptor.version>3.4.4</disruptor.version>
     </properties>
@@ -67,6 +67,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
